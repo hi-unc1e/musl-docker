@@ -21,10 +21,10 @@ jobs:
           CHANNEL=stable
         tags: clux/muslrust:temp
 
-    - name: Compute tags
+    - name: Compute rustc version
       shell: bash
       run: docker run clux/muslrust:temp rustc --version
 
-    - name: Compute tags
+    - name: Verify we can run git fetch
       shell: bash
       run: docker run -v $PWD:/volume -w /volume -t clux/muslrust:temp git config --global --add safe.directory /volume && git fetch --tags
