@@ -27,4 +27,4 @@ jobs:
 
     - name: Compute tags
       shell: bash
-      run: docker run -v $PWD:/volume -w /volume -t clux/muslrust:temp git fetch --tags
+      run: docker run -v $PWD:/volume -w /volume -t clux/muslrust:temp git config --global --add safe.directory /volume && git fetch --tags
