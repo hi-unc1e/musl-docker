@@ -12,7 +12,7 @@ build-nightly: (_build "nightly")
 
 # Shell into the built container
 run:
-	docker run -v $PWD/test:/volume  -w /volume -it clux/muslrust:temp /bin/bash
+	docker run -v $PWD:/volume  -w /volume -it clux/muslrust:temp /bin/bash
 
 # Test an individual crate against built containr
 _t crate:

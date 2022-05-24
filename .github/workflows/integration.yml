@@ -1,0 +1,30 @@
+name: integration
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  docker:
+    name: 'Integration tests'
+    runs-on: 'ubuntu-latest'
+    steps:
+    - uses: 'actions/checkout@v2'
+    - uses: extractions/setup-just@v1
+
+    - name: Build stable image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: false
+        build-args: |
+          CHANNEL=stable
+        tags: clux/muslrust:temp
+
+    - name: Compute tags
+      shell: bash
+      run: docker run clux/muslrust:temp rustc --version
+
+    - name: Compute tags
+      shell: bash
+      run: docker run -v $PWD:/volume -w /volume -t clux/muslrust:temp git fetch --tags
