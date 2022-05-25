@@ -31,4 +31,4 @@ jobs:
 
     - name: Verify we can docker build in builder pattern
       shell: bash
-      run: just integration
+      run: docker build --build-arg CRATE="hypercrate" -f test/Dockerfile.test -t clux/muslrust-tests:temp test/

@@ -15,10 +15,10 @@ run:
 	docker run -v $PWD:/volume  -w /volume -it clux/muslrust:temp /bin/bash
 
 _i crate:
-  docker build --build-arg CRATE="{{crate}}crate" -f Dockerfile.test -t clux/muslrust-tests:temp .
+  docker build --build-arg CRATE="{{crate}}crate" -f test/Dockerfile.test -t clux/muslrust-tests:temp test/
 
-# Test building all crates in a builder pattern
-integration: (_i "plain") (_i "ssl") (_i "rustls") (_i "pq") (_i "serde") (_i "curl") (_i "zlib") (_i "hyper") (_i "dieselpg") (_i "dieselsqlite")
+# Test builder pattern and building a copied crate in a builder
+integration: (_i "hyper")
 
 # Test an individual crate against built container
 _t crate:
