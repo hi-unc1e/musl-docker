@@ -28,3 +28,7 @@ jobs:
     - name: Verify we can run git fetch
       shell: bash
       run: docker run -v $PWD:/volume -w /volume -t clux/muslrust:temp git config --global --add safe.directory /volume && git fetch --tags
+
+    - name: Verify we can docker build in builder pattern
+      shell: bash
+      run: just integration

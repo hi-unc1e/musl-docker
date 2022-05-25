@@ -14,7 +14,13 @@ build-nightly: (_build "nightly")
 run:
 	docker run -v $PWD:/volume  -w /volume -it clux/muslrust:temp /bin/bash
 
-# Test an individual crate against built containr
+_i crate:
+  docker build --build-arg CRATE="{{crate}}crate" -f Dockerfile.test -t clux/muslrust-tests:temp .
+
+# Test building all crates in a builder pattern
+integration: (_i "plain") (_i "ssl") (_i "rustls") (_i "pq") (_i "serde") (_i "curl") (_i "zlib") (_i "hyper") (_i "dieselpg") (_i "dieselsqlite")
+
+# Test an individual crate against built container
 _t crate:
     ./test.sh {{crate}}
 
