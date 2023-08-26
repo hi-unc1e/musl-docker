@@ -1,10 +1,12 @@
 # See https://just.systems/man/
 
+ARCH := `uname -m`
+
 default:
   @just --list --unsorted --color=always | rg -v "    default"
 
 _build channel:
-	docker build --build-arg CHANNEL="{{channel}}" -t clux/muslrust:temp .
+	docker build --build-arg CHANNEL="{{channel}}" -f Dockerfile.{{ARCH}} -t clux/muslrust:temp .
 # Build the stable container locally tagged as :temp
 build-stable: (_build "stable")
 # Build the nightly container locally tagged as :temp
