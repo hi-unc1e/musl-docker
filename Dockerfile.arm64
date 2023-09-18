@@ -58,6 +58,18 @@ ENV SSL_VER="1.1.1q" \
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig \
     LD_LIBRARY_PATH=$PREFIX
 
+ENV TARGET="x86_64-unknown-linux-musl" \
+    TARGET_PREFIX=/musl \
+    TARGET_PKG_CONFIG_PATH=/musl/lib/pkgconfig \
+    TARGET_LD="${TARGET}-ld" \
+    TARGET_AR="${TARGET}-ar" \
+    TARGET_CC="${TARGET}-gcc" \
+    TARGET_CXX="${TARGET}-g++" \
+    TARGET_RANLIB="${TARGET}-ranlib" \
+    TARGET_LDFLAGS="-flto -s -pie -static -L/musl/lib" \
+    RUST_MUSL_CROSS_TARGET="${TARGET}" \
+    SYSROOT="/musl/${TARGET}"
+
 # Set up a prefix for musl build libraries, make the linker's job of finding them easier
 # Primarily for the benefit of postgres.
 # Lastly, link some linux-headers for openssl 1.1 (not used herein)
