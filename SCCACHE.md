@@ -110,6 +110,9 @@ and set `MOUNT_ROOT` to `/tmp/muslrust` in CI. (`$HOME` may or may not work corr
 
 The only reason to get fancier with the gha cache keys here is if you have lots of jobs using this and for some reason you don't expect them to be able to share artifacts.
 For example, if you are using `muslrust:stable` and `muslrust:nightly`, probably nothing at all can be shared between these builds so you might as well use separate github cache keys for those.
+That's an efficiency consideration -- there's no point to have the `muslrust:nightly` job download a bunch of cached artifacts from the `muslrust:stable` job that there's no way it can get hits on,
+it will just slow down your CI a bit because it downloads stuff it doesn't need. But it's not a correctness consideration. Even if the `muslrust:nightly` stuff got into your `SCCACHE_DIR` on a job
+using `muslrust:stable`, it shouldn't cause a bad build, because `sccache` caching is sound.
 
 Note that per docu, github has a repository limit of 10G in total for all caches created this way. I suggest using 5G as the `SCCACHE_CACHE_SIZE` and leaving some G's for the `.cargo/registry`, but ymmv.
 
