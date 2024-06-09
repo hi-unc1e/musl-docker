@@ -34,6 +34,7 @@ ldd target/x86_64-unknown-linux-musl/release/EXECUTABLE
 - [Kubernetes reflector with axum using builder pattern](https://github.com/kube-rs/version-rs/blob/main/Dockerfile)
 - [Kubernetes controller using cargo-chef for caching layers](https://github.com/qualified/ephemeron/blob/main/k8s/controller/Dockerfile)
 - [Github release assets uploaded via github actions](https://github.com/kube-rs/kopium/blob/f554ad9780dec3c76b4cef8a16a02bc82dded2be/.github/workflows/release.yml)
+- [Using muslrust with sccache & github actions](./SCCACHE.md)
 
 The binaries and images for small apps generally end up `<10MB` compressed or `~20MB` uncompressed without stripping.
 
