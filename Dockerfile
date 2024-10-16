@@ -33,7 +33,8 @@ RUN apt-get update && apt-get install -y \
   libprotobuf-dev \
   unzip \
   --no-install-recommends
-# hydra deps
+
+# Add  hydra deps
 RUN  apt-get install -y libssl-dev libssh-dev libidn11-dev libpcre3-dev libgtk2.0-dev libmysqlclient-dev libpq-dev libsvn-dev firebird-dev libncurses5-dev gcc-multilib vim &&  rm -rf /var/lib/apt/lists/*
 
 
